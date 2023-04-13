@@ -9,3 +9,15 @@ body {
     padding-top: 10px;
     margin: 0;
   }
+
+  img {
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 100px;
+    width: 100px;
+    min-width: 50px;
+    min-height: 50px;
+    
+  }
