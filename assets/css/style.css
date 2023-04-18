@@ -10,7 +10,7 @@ body {
     margin: 0;
   }
 
-  img {
+  .logo {
     border-radius: 50%;
     position: absolute;
     top: 20px;
@@ -21,7 +21,11 @@ body {
     min-height: 50px;
     
   }
+   img {
+    border-style: none
+   }
 
+   
   .hero {
  
     background-color: rgba(0, 0, 0, 0.8);
