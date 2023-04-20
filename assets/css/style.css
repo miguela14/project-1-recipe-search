@@ -40,7 +40,7 @@ body {
     margin-top: 300px;
   }
 
-  footer{
+  /* footer{
     background-color: rgb(0, 0, 0);
     color: white;
     text-align: center;
@@ -58,14 +58,14 @@ body {
 }
 
 #content-wrap {
-  padding-bottom: 2.5rem;    /* Footer height */
+  padding-bottom: 2.5rem;
 }
 
 #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;            /* Footer height */
+  height: 2.5rem;
   opacity: 0.8;
 }
 
@@ -83,5 +83,4 @@ float: right;
   font-size: 20px;
   border: none;
   cursor: pointer;
-}
-
+} */
