@@ -1,4 +1,4 @@
-const apiKey = "f3583b1d835a43cbafe20f0b027af62d";
+const apiKey = "765760d6974e4bfa97b62ed6b288bf5d";
 const weatherApiKey = "f0be9251af5eee648cd019d6c492648b";
 const searchButton = document.getElementById("search-input");
 const input = document.getElementById("recipe-input");
@@ -16,10 +16,11 @@ async function fetchRecipeData(search) {
   let cuisineObject = {
     name:"",
     image:"",
-    recipe: []
+    recipe: [],
+    sourceUrl: ""
   }
   var recipes = JSON.parse(localStorage.getItem(search))
-
+  
   if (recipes) {
     console.log("we found the recipes")
     if (!recipes[0].recipe || recipes[0].vegetarian){
@@ -28,11 +29,12 @@ async function fetchRecipeData(search) {
         cuisineObject = {
           name: recipes[i].title,
           image: recipes[i].image,
-          recipe: []
+          recipe: [],
+          url: recipes[i].sourceUrl
         }
-  
+        
         recipes[i].extendedIngredients.forEach((element)=> {
-        cuisineObject.recipe.push(element.original)
+          cuisineObject.recipe.push(element.original)
         })
         localStoragePrep.push(cuisineObject)
       }
@@ -40,37 +42,38 @@ async function fetchRecipeData(search) {
     }
     renderRecipeCard(recipes)
   } else {
-console.log("making fetch request")
-  
-  const cuisineInfoResponse = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?query=${search}&apiKey=${apiKey}`
-    ).then((response) => response.json());
+    console.log("making fetch request")
     
-    let arrayOfIds = []
-    
-    
-    let arrayOfCuisines = cuisineInfoResponse.results;
-    console.log(arrayOfCuisines);
-    
-    arrayOfCuisines.forEach(element => {
-      arrayOfIds.push(element.id)
-    });
-    arrayOfIds = (arrayOfIds.toString())
-    var recipeInfo = await fetch(
-      `https://api.spoonacular.com/recipes/informationBulk?ids=${arrayOfIds}&apiKey=${apiKey}`
+    const cuisineInfoResponse = await fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?query=${search}&apiKey=${apiKey}`
+      ).then((response) => response.json());
+      
+      let arrayOfIds = []
       
       
-      ).then((response) => response.json())
-      console.log("Setting Initial Data")
-      localStorage.setItem(search, JSON.stringify(recipeInfo))
-      recipes = JSON.parse(localStorage.getItem(search))
-      for (let i = 0; i < recipes.length; i++) {
-        cuisineObject = {
-          name: recipes[i].title,
-          image: recipes[i].image,
-          recipe: []
-        }
-  
+      let arrayOfCuisines = cuisineInfoResponse.results;
+      console.log(arrayOfCuisines);
+      console.log(cuisineInfoResponse);
+      
+      arrayOfCuisines.forEach(element => {
+        arrayOfIds.push(element.id)
+      });
+      arrayOfIds = (arrayOfIds.toString())
+      var recipeInfo = await fetch(
+        `https://api.spoonacular.com/recipes/informationBulk?ids=${arrayOfIds}&apiKey=${apiKey}`
+        
+        ).then((response) => response.json())
+        console.log("Setting Initial Data")
+        localStorage.setItem(search, JSON.stringify(recipeInfo))
+        recipes = JSON.parse(localStorage.getItem(search))
+        for (let i = 0; i < recipes.length; i++) {
+          cuisineObject = {
+            name: recipes[i].title,
+            image: recipes[i].image,
+            recipe: [],
+            sourceUrl: ""
+          }
+          
         recipes[i].extendedIngredients.forEach((element)=> {
         cuisineObject.recipe.push(element.original)
         })
@@ -131,6 +134,7 @@ recipeList[i].recipe.forEach(function(item) {
           </div>
         </div>
       </div>`
+      recipeForm.append(card);
      var listContainer = document.querySelector('#list-container')
      console.log(ul)
      console.log(listContainer)
@@ -141,7 +145,6 @@ recipeList[i].recipe.forEach(function(item) {
       //   localStorage.setItem("recipes", JSON.stringify(savedRecipies));
       // });
       // column.append
-      recipeForm.append(card);
       
     };
 
