@@ -1,4 +1,4 @@
-const apiKey = "1da5f04b49044f0ab13a5a08cbae7b20";
+const apiKey = "5c81980514314937942326079c02a9ee";
 const weatherApiKey = "f0be9251af5eee648cd019d6c492648b";
 const searchButton = document.getElementById("search-input");
 const input = document.getElementById("recipe-input");
@@ -16,7 +16,6 @@ async function fetchRecipeData(recipe) {
   
   let arrayOfCuisines = cuisineInfoResponse.results;
   console.log(arrayOfCuisines);
-  
   
   let arrayOfRecipes = []
     
