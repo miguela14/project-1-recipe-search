@@ -15,7 +15,7 @@
     * OpenWeather API
     * spoonacular API
 ## screenshot
-![Alt text](/assets/images/1000_F_488857441_0X2APVCX94Fhh8FCtcLJaqdkP3R99kHW.jpg "Webpage screenshot")
+![Alt text](/assets/images/127.0.0.1_5501_index.html%20(3).png "Webpage screenshot")
 
 ## Project Summary:
 As a user of this website I would like to be able to search for recipes, compile recipes, and have a place to save them.
