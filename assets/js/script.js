@@ -41,7 +41,8 @@ async function fetchRecipeData(recipe) {
       cuisineResults.extendedIngredients.forEach(function (element) {
         cuisineObject.recipe.push(element.original)
       });
-    
+    //fetch("some.json", {cache: "force-cache"})
+    //https://spoonacular.com/food-api/docs#Get-Recipe-Information-Bulk
       arrayOfRecipes.push(cuisineObject)
 
       
@@ -85,6 +86,10 @@ function renderRecipeCard(recipeObject) {
     var cardBody = document.createElement("div");
     var recipeImage = document.createElement("img");
     var recipeTitle = document.createElement("h3");
+
+      var saveButton = document.createElement("button");
+      var savedRecipies = JSON.parse(localStorage.getItem("recipes")) || [];
+
     card.setAttribute("class", "card");
     cardBody.setAttribute("class", "card-body");
     card.append(cardBody);
@@ -92,13 +97,28 @@ function renderRecipeCard(recipeObject) {
     recipeTitle.textContent = `${title}`;
     recipeImage.setAttribute("src", recipeImageUrl);
     recipeImage.setAttribute("class", "recipe-image");
-    cardBody.append(recipeImage, recipeTitle);
-    // recipeForm.innerHTML = "";
+
+      saveButton.setAttribute("class", "btn btn-primary save-button");
+      saveButton.textContent = "Save Recipe";
+
+    cardBody.append(recipeImage, recipeTitle, saveButton);
     
-  
+  saveButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    savedRecipies.push(recipeObject);
+    localStorage.setItem("recipes", JSON.stringify(savedRecipies));
+  });
   // column.append
   recipeForm.append(card);
 }
+//finish
+
+  function displaySavedRecipes() {
+    const savedRecipies = JSON.parse(localStorage.getItem("recipes")) || [];
+    savedRecipies.forEach(function(recipeObject) {
+      renderRecipeCard(recipeObject);
+    });
+  }
 
 // function storageData() {
 //   const recipes = JSON.parse(localStorage.getItem("recipes"));
