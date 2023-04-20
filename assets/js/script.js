@@ -12,6 +12,7 @@ const recipeForm = document.getElementById("recipe-form");
 async function fetchRecipeData(search) {
   search = search.toLowerCase()
   var localStoragePrep = []
+
   let cuisineObject = {
     name:"",
     image:"",
@@ -145,7 +146,6 @@ recipeList[i].recipe.forEach(function(item) {
     };
 
 }
-//finish
 
   function displaySavedRecipes() {
     const savedRecipies = JSON.parse(localStorage.getItem("recipes")) || [];
